@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const mysql = require('mysql2');
-const config = require('../congfig'); // Adjust the path if needed
+const config = require('../config'); // Adjust the path if needed
 
 
 
@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
     if (err) throw err;
     console.log('Connected');
   });
-  const query = 'SELECT * FROM Meeting';
+  const query = 'SELECT user_id, book_id, meeting_id, content FROM Reviews, Contents ORDER BY end_date DESC LIMIT 5';
   con.query(query, function(err, results) {
     if (err) {
       console.error('Error executing query:', err);
