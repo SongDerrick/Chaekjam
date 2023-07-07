@@ -39,21 +39,5 @@ app.use(function(err, req, res, next) {
 });
 
 
-const port = 3000
-
-const mysql = require('mysql');
-
-const con = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'alswldus3@'
-});
-
-con.connect(function(err) {
-  if (err) throw err;
-  console.log('Connected');
-});
-
-
 
 module.exports = app;
