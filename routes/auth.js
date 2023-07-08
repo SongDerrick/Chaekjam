@@ -6,7 +6,7 @@ const qs = require('qs');
 const kakao = {
     clientID: 'b666c0101243c203e7f78c1aa9542c61',
     clientSecret: 'FylBXq0mfUflist3lPIcA8DrusPzMdO4',
-    redirectUri: 'http://localhost:3000/auth/kakao/callback'
+    redirectUri: 'http://172.10.5.121:443/auth/kakao/callback'
   }
 const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao.clientID}&redirect_uri=${kakao.redirectUri}&response_type=code`;
 /* GET home page. */
