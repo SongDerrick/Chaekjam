@@ -3,11 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const axios = require('axios');
+const qs = require('qs');
+const session = require('express-session');
+ 
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var meetingRouter = require('./routes/meeting')
 var reviewRouter = require('./routes/review')
+var authRouter = require('./routes/auth')
 
 var app = express();
 
@@ -25,6 +30,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/meeting', meetingRouter);
 app.use('/review', reviewRouter);
+app.use('/auth', authRouter)
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
