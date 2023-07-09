@@ -60,6 +60,9 @@ router.get('/kakao/callback', async(req,res)=>{
       console.log(user.data.properties)
 
       var user_id = user.data.id
+      var username = user.data.properties.nickname
+      var profile_image = user.data.properties.profile_image
+      var thumbnail_image = user.data.properties.thumbnail_image
 
 
       const con = mysql.createConnection({
@@ -81,7 +84,18 @@ router.get('/kakao/callback', async(req,res)=>{
           return;
         } else {
             if (results.length == 0){
-                res.send("User NOT FOUND")
+                const insertQuery = 'INSERT INTO Users (user_id, username, profile_image, thumbnail_image) VALUES (?, ?, ?, ?)';
+                con.query(insertQuery, [user_id, username, profile_image, thumbnail_image], function(err, insertResult) {
+                    if (err) {
+                        console.error('Error executing insert query:', err);
+                        res.status(500).send('Error inserting data into the database');
+                    } else {
+                        console.log('User inserted successfully');
+                        res.send('User inserted successfully');
+                    }
+                });
+
+
             } else {
                 console.log(results)
                 res.send(results);
