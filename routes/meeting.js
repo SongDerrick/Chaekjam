@@ -28,7 +28,7 @@ router.get('/reg', function(req, res, next) {
         console.log(results)
         res.send(results);
     }
-});
+  });
   
 });
 
@@ -55,7 +55,7 @@ router.get('/un_reg', function(req, res, next) {
         console.log(results)
         res.send(results);
     }
-});
+  });
   
 });
 

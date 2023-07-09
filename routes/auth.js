@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const axios = require('axios');
 const qs = require('qs');
+const mysql = require('mysql2');
+const config = require('../config'); 
 
 const kakao = {
     clientID: 'b666c0101243c203e7f78c1aa9542c61',
@@ -57,7 +59,36 @@ router.get('/kakao/callback', async(req,res)=>{
       console.log(user.data.id)
       console.log(user.data.properties)
 
+      var user_id = user.data.id
 
+
+      const con = mysql.createConnection({
+        host: config.database.host,
+        user: config.database.user,
+        password: config.database.password,
+        database: config.database.name
+      });
+      
+      con.connect(function(err) {
+        if (err) throw err;
+        console.log('Connected');
+      });
+      const query = 'SELECT * FROM Users WHERE user_id=?';
+      con.query(query, user_id, function(err, results) {
+        if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).send('Error retrieving data from the database');
+          return;
+        } else {
+            if (results.length == 0){
+                res.send("User NOT FOUND")
+            } else {
+                console.log(results)
+                res.send(results);
+            }
+            
+        }
+      });
       
       res.redirect('/');
     })
