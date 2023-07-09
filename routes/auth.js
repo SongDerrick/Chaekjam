@@ -18,7 +18,7 @@ const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao.
 //     res.redirect(kakaoAuthURL);
 // });
 
-router.get('/success',(req,res)=>{
+router.get('/success/:id',(req,res)=>{
     res.render('info');
 })
 
@@ -101,14 +101,14 @@ router.get('/kakao/callback', async(req,res)=>{
                         res.status(500).send('Error inserting data into the database');
                     } else {
                         console.log('User inserted successfully');
-                        res.redirect('/auth/success');
+                        res.redirect('/auth/success/' + user_id);
                     }
                 });
 
 
             } else { // 유저가 DB에 있는 경우, 이미 우리 회원이므로 정보 추출
                 console.log(results)
-                res.redirect('/auth/success');
+                res.redirect('/auth/success/' + user_id);
             }
             
         }
