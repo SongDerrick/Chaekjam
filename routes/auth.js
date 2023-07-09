@@ -90,7 +90,7 @@ router.get('/kakao/callback', async(req,res)=>{
         }
       });
       
-      res.redirect('/');
+      // res.redirect('/');
     })
   
 
