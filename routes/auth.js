@@ -57,31 +57,7 @@ router.get('/kakao/callback', async(req,res)=>{
       console.log(user.data.id)
       console.log(user.data.properties)
 
-      const con = mysql.createConnection({
-        host: config.database.host,
-        user: config.database.user,
-        password: config.database.password,
-        database: config.database.name
-      });
-      
-      con.connect(function(err) {
-        if (err) throw err;
-        console.log('Connected');
-      });
-      const query = 'SELECT * FROM Users WHERE type=?';
-      con.query(query, function(err, results) {
-        if (err) {
-          console.error('Error executing query:', err);
-          res.status(500).send('Error retrieving data from the database');
-          return;
-        } else {
-            console.log(results)
-            res.send(results);
-        }
-      });
-   
-      // req.session.kakao = user.data;
-      //req.session = {['kakao'] : user.data};
+
       
       res.redirect('/');
     })
