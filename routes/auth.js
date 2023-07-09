@@ -108,7 +108,7 @@ router.get('/kakao/callback', async(req,res)=>{
 
             } else { // 유저가 DB에 있는 경우, 이미 우리 회원이므로 정보 추출
                 console.log(results)
-                res.redirect('/success');
+                res.redirect('/auth/success');
             }
             
         }
