@@ -5,11 +5,13 @@ const qs = require('qs');
 const mysql = require('mysql2');
 const config = require('../config'); 
 
-const kakao = {
-    clientID: 'b666c0101243c203e7f78c1aa9542c61',
-    clientSecret: 'FylBXq0mfUflist3lPIcA8DrusPzMdO4',
-    redirectUri: 'http://172.10.5.121:443/auth/kakao/callback'
-  }
+// const kakao = {
+//     clientID: 'b666c0101243c203e7f78c1aa9542c61',
+//     clientSecret: 'FylBXq0mfUflist3lPIcA8DrusPzMdO4',
+//     redirectUri: 'http://172.10.5.121:443/auth/kakao/callback'
+//   }
+
+const kakao = config.kakao
 const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao.clientID}&redirect_uri=${kakao.redirectUri}&response_type=code`;
 /* GET home page. */
 // router.get('/kakao', function(req, res, next) {
