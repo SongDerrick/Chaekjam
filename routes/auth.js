@@ -70,20 +70,24 @@ router.get('/kakao/callback', async(req,res)=>{
         user: config.database.user,
         password: config.database.password,
         database: config.database.name
-      });
+      })
       
       con.connect(function(err) {
         if (err) throw err;
         console.log('Connected');
       });
       const query = 'SELECT * FROM Users WHERE user_id=?';
-      con.query(query, user_id, function(err, results) {
+      con.query(query, user_id, function(err, results) { // User 정보를 내부 DB 에 접근해서 찾아본다.
         if (err) {
           console.error('Error executing query:', err);
-          res.status(500).send('Error retrieving data from the database');
+          res.status(500).send('Error retrieving data from the database');// 내부 DB error 핸들링
           return;
-        } else {
-            if (results.length == 0){
+        } 
+        
+        else 
+        {
+            if (results.length == 0){ // 유저가 내부 DB에 없는 경우 자동으로 회원가입을 시켜버린다 강제임 ㅋㅋ
+
                 const insertQuery = 'INSERT INTO Users (user_id, username, profile_image, thumbnail_image) VALUES (?, ?, ?, ?)';
                 con.query(insertQuery, [user_id, username, profile_image, thumbnail_image], function(err, insertResult) {
                     if (err) {
@@ -96,7 +100,7 @@ router.get('/kakao/callback', async(req,res)=>{
                 });
 
 
-            } else {
+            } else { // 유저가 DB에 있는 경우, 이미 우리 회원이므로 정보 추출
                 console.log(results)
                 res.send(results);
             }
