@@ -24,8 +24,8 @@ const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao.
 //     res.redirect(kakaoAuthURL);
 // });
 
-router.get('/success', autheticateToken, (req,res)=>{
-    console.log(req)
+router.get('/success/:token', autheticateToken, (req,res)=>{
+    console.log(req.params.token)
     res.json(req.user);
 })
 
@@ -120,8 +120,8 @@ router.get('/kakao/callback', async(req,res)=>{
                 console.log(access_token)
                 // res.redirect('/auth/success/' + user_id);
                 // res.json({access_token : access_token})
-                res.set('Authorization', access_token)
-                res.redirect('/auth/success')
+                // res.set('Authorization', access_token)
+                res.redirect('/auth/success'+ access_token)
             }
             
         }
