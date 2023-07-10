@@ -121,7 +121,7 @@ router.get('/kakao/callback', async(req,res)=>{
                 // res.redirect('/auth/success/' + user_id);
                 // res.json({access_token : access_token})
                 // res.set('Authorization', access_token)
-                res.redirect('/auth/success'+ access_token)
+                res.redirect('/auth/success/'+ access_token)
             }
             
         }
