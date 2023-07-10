@@ -24,9 +24,9 @@ const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao.
 //     res.redirect(kakaoAuthURL);
 // });
 
-router.get('/success/:id',(req,res)=>{
+router.get('/success', autheticateToken, (req,res)=>{
     console.log(req)
-    res.render('info');
+    res.json(req.user);
 })
 
 router.get('/kakao',(req,res)=>{
@@ -126,6 +126,18 @@ router.get('/kakao/callback', async(req,res)=>{
       
       // res.redirect('/');
     })
+
+function autheticateToken(req,res,next) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1] // authHeader가 있어야 리턴
+    if(token == null) return res.sendStatus(401)
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+        if(err) return res.sendStatus(403)
+        req.user = user
+        next()
+    })
+}
   
 
 module.exports = router;
