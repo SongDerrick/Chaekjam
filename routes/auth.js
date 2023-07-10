@@ -4,7 +4,7 @@ const axios = require('axios');
 const qs = require('qs');
 const mysql = require('mysql2');
 const config = require('../config'); 
-const jwt = require('jsonwebtokens')
+const jwt = require('jsonwebtoken')
 
 
 
