@@ -131,9 +131,10 @@ router.get('/kakao/callback', async(req,res)=>{
     })
 
 function autheticateToken(req,res,next) {
-    console.log(req.headers)
+    console.log(req.params.token)
     const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1] // authHeader가 있어야 리턴
+    //const token = authHeader && authHeader.split(' ')[1] // authHeader가 있어야 리턴
+    const token = req.params.token
     if(token == null) return res.sendStatus(401)
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
