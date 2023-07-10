@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 var express = require('express');
 var router = express.Router();
 const axios = require('axios');
@@ -5,6 +7,7 @@ const qs = require('qs');
 const mysql = require('mysql2');
 const config = require('../config'); 
 const jwt = require('jsonwebtoken')
+
 
 
 
