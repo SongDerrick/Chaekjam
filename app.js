@@ -3,8 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const axios = require('axios');
-const qs = require('qs');
 const session = require('express-session');
  
 

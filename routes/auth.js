@@ -4,6 +4,9 @@ const axios = require('axios');
 const qs = require('qs');
 const mysql = require('mysql2');
 const config = require('../config'); 
+const jwt = require('jsonwebtokens')
+
+
 
 // const kakao = {
 //     clientID: 'b666c0101243c203e7f78c1aa9542c61',
@@ -109,7 +112,10 @@ router.get('/kakao/callback', async(req,res)=>{
 
             } else { // 유저가 DB에 있는 경우, 이미 우리 회원이므로 정보 추출
                 console.log(results)
-                res.redirect('/auth/success/' + user_id);
+                const ouruser = { user_id: user_id }
+                const access_token = jwt.sign(ouruser, process.env.ACCESS_TOKEN_SECRET)
+                // res.redirect('/auth/success/' + user_id);
+                res.json({access_token : access_token})
             }
             
         }
