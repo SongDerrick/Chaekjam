@@ -19,6 +19,7 @@ const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao.
 // });
 
 router.get('/success/:id',(req,res)=>{
+    console.log(req)
     res.render('info');
 })
 
