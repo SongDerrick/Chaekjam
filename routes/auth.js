@@ -118,7 +118,8 @@ router.get('/kakao/callback', async(req,res)=>{
                 const ouruser = { user_id: user_id }
                 const access_token = jwt.sign(ouruser, process.env.ACCESS_TOKEN_SECRET)
                 // res.redirect('/auth/success/' + user_id);
-                res.json({access_token : access_token})
+                // res.json({access_token : access_token})
+                res.redirect('/auth/success')
             }
             
         }
