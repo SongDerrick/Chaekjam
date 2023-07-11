@@ -32,7 +32,6 @@ router.get('/reg', function(req, res, next) {
   
 });
 
-
 router.get('/un_reg', function(req, res, next) {
   const con = mysql.createConnection({
     host: config.database.host,
