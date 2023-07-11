@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
     if (err) throw err;
     console.log('Connected');
   });
-  const query = 'SELECT Reviews.user_id, Reviews.book_id, Reviews.meeting_id, Reviews.content_id, Contents.content, Contents.rating, Book.title, Users.username FROM Reviews ' +
+  const query = 'SELECT Reviews.user_id, Reviews.book_id, Reviews.meeting_id, Reviews.content_id, Contents.content, Contents.rating, Book.title, Book.imagelink, Users.username FROM Reviews ' +
   'JOIN Contents ON Reviews.content_id = Contents.content_id ' +
   'JOIN Book ON Reviews.book_id = Book.book_id ' +
   'JOIN Users ON Reviews.user_id = Users.user_id ' +
