@@ -18,7 +18,7 @@ router.get('/reg', function(req, res, next) {
     if (err) throw err;
     console.log('Connected');
   });
-  const query = 'SELECT * FROM Meeting WHERE type=0';
+  const query = 'SELECT * FROM Meeting WHERE type=0 ORDER BY meeting_id DESC LIMIT 10';
   con.query(query, function(err, results) {
     if (err) {
       console.error('Error executing query:', err);
