@@ -66,7 +66,7 @@ router.get('/book/:id', (req ,res, next)=> {
     } else {
         if(results.length == 1){
           console.log(results, user_id)
-          res.send(results[0].count);
+          res.send(results);
         } else {
           res.send('USER NOT FOUND')
         }
