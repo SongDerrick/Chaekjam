@@ -26,6 +26,7 @@ router.get('/:id', autheticateToken, function(req, res, next) {
   });
   const query = 'SELECT * FROM Users WHERE user_id =?';
   const countQuery = 'SELECT COUNT(*) AS count FROM Reviews WHERE user_id =?';
+  const bookIdQuery = 'SELECT book_id FROM Reviews WHERE user_id = ?';
   
   con.query(query, user_id, function(err, results) {
     if (err) {
@@ -43,8 +44,18 @@ router.get('/:id', autheticateToken, function(req, res, next) {
             } else {
               const count = countResult[0].count;
               results[0].review_count = count;
-  
-              res.send(results);
+              con.query(bookIdQuery, user_id, function(err, bookIdResult) {
+                if (err) {
+                  console.error('Error executing book ID query:', err);
+                  res.status(500).send('Error retrieving book ID from the database');
+                  return;
+                } else {
+                  const bookId = bookIdResult[0].book_id;
+                  results[0].book_id = bookId;
+    
+                  res.send(results);
+                }
+              });
             }
           });
           // res.send(results);
