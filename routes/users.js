@@ -42,7 +42,7 @@ router.get('/:id', autheticateToken, function(req, res, next) {
   
 });
 
-router.get('/book/:id', (res,req, next)=> {
+router.get('/book/:id', (req ,res, next)=> {
   console.log(req.params.id)
 
   var user_id = req.params.id
