@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
     if (err) throw err;
     console.log('Connected');
   });
-  const query = 'SELECT user_id, book_id, meeting_id, content, rating FROM Reviews, Contents ORDER BY end_date DESC LIMIT 10';
+  const query = 'SELECT user_id, book_id, meeting_id, content_id, content, rating FROM Reviews, Contents ORDER BY end_date DESC LIMIT 10';
   con.query(query, function(err, results) {
     if (err) {
       console.error('Error executing query:', err);
