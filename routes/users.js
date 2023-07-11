@@ -43,6 +43,7 @@ router.get('/:id', autheticateToken, function(req, res, next) {
 });
 
 router.get('/book/:username', (res,req, next)=> {
+  console.log(req.params)
 
   var user_name = req.params.username;
   const con = mysql.createConnection({
