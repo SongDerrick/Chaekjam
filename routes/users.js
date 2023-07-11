@@ -47,7 +47,7 @@ router.get('/:id', autheticateToken, function(req, res, next) {
               res.send(results);
             }
           });
-          res.send(results);
+          // res.send(results);
         } else {
           res.send('USER NOT FOUND')
         }
