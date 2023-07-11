@@ -18,7 +18,11 @@ router.get('/', function(req, res, next) {
     if (err) throw err;
     console.log('Connected');
   });
-  const query = 'SELECT user_id, book_id, meeting_id, Reviews.content_id, content, rating FROM Reviews, Contents WHERE Reviews.content_id = Contents.content_id ORDER BY end_date DESC LIMIT 10';
+  const query = 'SELECT Reviews.user_id, Reviews.book_id, Reviews.meeting_id, Reviews.content_id, Contents.content, Reviews.rating, Books.book_title, Users.user_name FROM Reviews ' +
+  'JOIN Contents ON Reviews.content_id = Contents.content_id ' +
+  'JOIN Books ON Reviews.book_id = Books.book_id ' +
+  'JOIN Users ON Reviews.user_id = Users.user_id ' +
+  'ORDER BY Reviews.end_date DESC LIMIT 10';
   con.query(query, function(err, results) {
     if (err) {
       console.error('Error executing query:', err);
