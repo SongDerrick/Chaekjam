@@ -25,6 +25,8 @@ router.get('/:id', autheticateToken, function(req, res, next) {
     console.log('Connected');
   });
   const query = 'SELECT * FROM Users WHERE user_id =?';
+  const countQuery = 'SELECT COUNT(*) AS count FROM Reviews WHERE user_id =?';
+  
   con.query(query, user_id, function(err, results) {
     if (err) {
       console.error('Error executing query:', err);
@@ -33,6 +35,18 @@ router.get('/:id', autheticateToken, function(req, res, next) {
     } else {
         if(results.length == 1){
           console.log(results, user_id)
+          con.query(countQuery, user_id, function(err, countResult) {
+            if (err) {
+              console.error('Error executing count query:', err);
+              res.status(500).send('Error retrieving count from the database');
+              return;
+            } else {
+              const count = countResult[0].count;
+              results[0].review_count = count;
+  
+              res.send(results);
+            }
+          });
           res.send(results);
         } else {
           res.send('USER NOT FOUND')
