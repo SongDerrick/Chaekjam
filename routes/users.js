@@ -26,7 +26,7 @@ router.get('/:id', autheticateToken, function(req, res, next) {
   });
   const query = 'SELECT * FROM Users WHERE user_id =?';
   const countQuery = 'SELECT COUNT(*) AS count FROM Reviews WHERE user_id =?';
-  const bookIdQuery = 'SELECT Book.title, Book.imagelink FROM Reviews, Book WHERE Reviews.book_id = Book.book_id and Reviews.user_id = ?';
+  const bookIdQuery = 'SELECT Book.title, Book.imagelink, Review.content FROM Reviews, Book WHERE Reviews.book_id = Book.book_id and Reviews.user_id = ?';
   
   con.query(query, user_id, function(err, results) {
     if (err) {
@@ -55,10 +55,12 @@ router.get('/:id', autheticateToken, function(req, res, next) {
                   // results[0].book_id = bookId;
                   const bookIds = bookIdResult.map(item => item.title);
                   const imagelinks = bookIdResult.map(item => item.imagelink);
+                  const contents = bookIdResult.map(item => item.content);
 
                   // Add book_id and imagelink to the results array
                   results[0].title = bookIds;
                   results[0].imagelink = imagelinks;
+                  results[0].content = contents;
     
                   res.send(results);
                 }
