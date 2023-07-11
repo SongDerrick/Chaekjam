@@ -25,7 +25,7 @@ router.get('/:id', autheticateToken, function(req, res, next) {
     console.log('Connected');
   });
   const query = 'SELECT * FROM Users WHERE user_id =?';
-  const countQuery = 'SELECT COUNT(*) AS count, book_id FROM Reviews WHERE user_id =?';
+  const countQuery = 'SELECT COUNT(*) AS count FROM Reviews WHERE user_id =?';
   
   con.query(query, user_id, function(err, results) {
     if (err) {
