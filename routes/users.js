@@ -57,7 +57,7 @@ router.get('/book/:id', (req ,res, next)=> {
     if (err) throw err;
     console.log('Connected');
   });
-  const query = 'SELECT * FROM Reviews WHERE user_id =?';
+  const query = 'SELECT COUNT(*) AS count FROM Reviews WHERE user_id =?';
   con.query(query, user_id, function(err, results) {
     if (err) {
       console.error('Error executing query:', err);
