@@ -21,7 +21,7 @@ router.get('/profile', function(req, res, next) {
     if (err) throw err;
     console.log('Connected');
   });
-  const query = 'SELECT * FROM Meeting WHERE type=0 DESC LIMIT 5';
+  const query = 'SELECT * FROM Meeting WHERE type=0 LIMIT 5';
   con.query(query, function(err, results) {
     if (err) {
       console.error('Error executing query:', err);

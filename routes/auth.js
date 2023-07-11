@@ -26,7 +26,7 @@ const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao.
 
 router.get('/success/:token', autheticateToken, (req,res)=>{
     console.log(req.params.token)
-    res.json(req.user);
+    res.send('Login Success');
 })
 
 router.get('/kakao',(req,res)=>{
