@@ -50,8 +50,9 @@ router.get('/:id', autheticateToken, function(req, res, next) {
                   res.status(500).send('Error retrieving book ID from the database');
                   return;
                 } else {
-                  const bookId = bookIdResult[0].book_id;
-                  results[0].book_id = bookId;
+                  console.log(bookIdResult)
+                  // const bookId = bookIdResult[0].book_id;
+                  // results[0].book_id = bookId;
     
                   res.send(results);
                 }
