@@ -16,7 +16,7 @@ router.get('/:id', autheticateToken, function(req, res, next) {
     database: config.database.name
   });
 
-  const user_name = req.user.username
+  const user_id = req.user.user_id
   console.log(req.user)
 
   
@@ -24,8 +24,8 @@ router.get('/:id', autheticateToken, function(req, res, next) {
     if (err) throw err;
     console.log('Connected');
   });
-  const query = 'SELECT * FROM Users WHERE username =?';
-  con.query(query, user_name, function(err, results) {
+  const query = 'SELECT * FROM Users WHERE user_id =?';
+  con.query(query, user_id, function(err, results) {
     if (err) {
       console.error('Error executing query:', err);
       res.status(500).send('Error retrieving data from the database');
