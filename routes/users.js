@@ -1,12 +1,14 @@
+require('dotenv').config()
 var express = require('express');
 var router = express.Router();
 const mysql = require('mysql2');
 const config = require('../config'); // Adjust the path if needed
+const jwt = require('jsonwebtoken')
 
 
 
 /* GET users listing. */
-router.get('/:id', function(req, res, next) {
+router.get('/:id', autheticateToken, function(req, res, next) {
   const con = mysql.createConnection({
     host: config.database.host,
     user: config.database.user,
@@ -14,7 +16,8 @@ router.get('/:id', function(req, res, next) {
     database: config.database.name
   });
 
-  var user_name = req.params.id;
+  const user_name = req.user.username
+
   
   con.connect(function(err) {
     if (err) throw err;
@@ -37,5 +40,19 @@ router.get('/:id', function(req, res, next) {
 });
   
 });
+
+function autheticateToken(req,res,next) {
+  console.log(req.params.id)
+  const authHeader = req.headers['authorization']
+  //const token = authHeader && authHeader.split(' ')[1] // authHeader가 있어야 리턴
+  const token = req.params.id
+  if(token == null) return res.sendStatus(401)
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+      if(err) return res.sendStatus(403)
+      req.user = user
+      next()
+  })
+}
 
 module.exports = router;
