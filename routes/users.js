@@ -53,7 +53,7 @@ router.get('/:id', autheticateToken, function(req, res, next) {
                   console.log(bookIdResult)
                   // const bookId = bookIdResult[0].book_id;
                   // results[0].book_id = bookId;
-                  const bookIds = bookIdResult.map(item => item.book_id);
+                  const bookIds = bookIdResult.map(item => item.title);
                   const imagelinks = bookIdResult.map(item => item.imagelink);
 
                   // Add book_id and imagelink to the results array
