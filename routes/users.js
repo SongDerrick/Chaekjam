@@ -17,6 +17,7 @@ router.get('/:id', autheticateToken, function(req, res, next) {
   });
 
   const user_name = req.user.username
+  console.log(req.user)
 
   
   con.connect(function(err) {
