@@ -32,7 +32,7 @@ router.get('/:id', autheticateToken, function(req, res, next) {
       return;
     } else {
         if(results.length == 1){
-          console.log(results, user_name)
+          console.log(results, user_id)
           res.send(results);
         } else {
           res.send('USER NOT FOUND')
