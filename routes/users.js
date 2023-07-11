@@ -42,10 +42,10 @@ router.get('/:id', autheticateToken, function(req, res, next) {
   
 });
 
-router.get('/book/:username', (res,req, next)=> {
-  console.log(req.params)
+router.get('/book/:id', (res,req, next)=> {
+  console.log(req.params.id)
 
-  var user_name = req.params.username;
+  var user_id = req.params.id
   const con = mysql.createConnection({
     host: config.database.host,
     user: config.database.user,
@@ -57,8 +57,8 @@ router.get('/book/:username', (res,req, next)=> {
     if (err) throw err;
     console.log('Connected');
   });
-  const query = 'SELECT * FROM Users, Reviews WHERE username =?';
-  con.query(query, user_name, function(err, results) {
+  const query = 'SELECT * FROM Users, Reviews WHERE user_id =?';
+  con.query(query, user_id, function(err, results) {
     if (err) {
       console.error('Error executing query:', err);
       res.status(500).send('Error retrieving data from the database');
