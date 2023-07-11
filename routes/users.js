@@ -26,7 +26,7 @@ router.get('/:id', autheticateToken, function(req, res, next) {
   });
   const query = 'SELECT * FROM Users WHERE user_id =?';
   const countQuery = 'SELECT COUNT(*) AS count FROM Reviews WHERE user_id =?';
-  const bookIdQuery = 'SELECT Book.title, Book.imagelink, Review.content FROM Reviews, Book WHERE Reviews.book_id = Book.book_id and Reviews.user_id = ?';
+  const bookIdQuery = 'SELECT Book.title, Book.imagelink, Contents.content FROM Reviews, Book, Contents WHERE Reviews.content_id = Contents.content_id and Reviews.book_id = Book.book_id and Reviews.user_id = ?';
   
   con.query(query, user_id, function(err, results) {
     if (err) {
