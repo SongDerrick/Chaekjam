@@ -108,6 +108,9 @@ router.get('/kakao/callback', async(req,res)=>{
                         res.status(500).send('Error inserting data into the database');
                     } else {
                         console.log('User inserted successfully');
+                        const ouruser = { user_id: user_id }
+                        const access_token = jwt.sign(ouruser, process.env.ACCESS_TOKEN_SECRET)
+                        console.log(access_token)
                         res.redirect('/auth/success/'+ access_token)
                     }
                 });
