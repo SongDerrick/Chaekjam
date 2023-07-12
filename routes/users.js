@@ -23,6 +23,7 @@ router.post('/:id', autheticateToken, function(req, res, next){
   var values = [content, '5']
 
   const sql1 = 'INSERT INTO Contents (content, rating) VALUES (?, ?)';
+  
   con.query(sql1, values, function(err, result) {
     if (err) {
       console.error('Error inserting values into Reviews table:', err);
@@ -31,6 +32,21 @@ router.post('/:id', autheticateToken, function(req, res, next){
 
     console.log('Values inserted into Contents table:', result);
     content_id = result.insertId
+    var values1 = [11, user_id, 1, 'Meeting', content_id, start_date, start_date];
+
+    const sql2 = 'INSERT INTO Reviews (meeting_id, user_id, book_id, review_type, content_id, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    con.query(sql2, values1, function(err, result) {
+      if (err) {
+        console.error('Error inserting values into Reviews table:', err);
+        return res.status(500).json({ error: 'Failed to insert values into Reviews table' });
+      }
+  
+      console.log('Values inserted into Reviews table:', result);
+    });
+  
+    con.end();
+  
+    
   });
 
   // const sql3 = 'SELECT MAX(content_id) AS largest_content_id FROM Contents;';
@@ -45,19 +61,6 @@ router.post('/:id', autheticateToken, function(req, res, next){
   //   console.log('Verified from Contents table:', result);
   // });
 
-  var values = [11, user_id, 1, 'Meeting', content_id, start_date, start_date];
-
-  const sql2 = 'INSERT INTO Reviews (meeting_id, user_id, book_id, review_type, content_id, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?, ?)';
-  con.query(sql2, values, function(err, result) {
-    if (err) {
-      console.error('Error inserting values into Reviews table:', err);
-      return res.status(500).json({ error: 'Failed to insert values into Reviews table' });
-    }
-
-    console.log('Values inserted into Reviews table:', result);
-  });
-
-  con.end();
 
 })
 /* GET users listing. */
