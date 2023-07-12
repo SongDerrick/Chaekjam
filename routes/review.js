@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
   'JOIN Contents ON Reviews.content_id = Contents.content_id ' +
   'JOIN Book ON Reviews.book_id = Book.book_id ' +
   'JOIN Users ON Reviews.user_id = Users.user_id ' +
-  'ORDER BY Reviews.end_date DESC LIMIT 10';
+  'ORDER BY Reviews.end_date DESC LIMIT 20';
   con.query(query, function(err, results) {
     if (err) {
       console.error('Error executing query:', err);
