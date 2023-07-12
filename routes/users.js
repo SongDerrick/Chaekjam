@@ -18,6 +18,7 @@ router.post('/:id', autheticateToken, function(req, res, next){
   const { title, content, start_date} = req.body;
   console.log(req.user)
   console.log(title, content, start_date)
+  var content_id = 0;
 
   var values = [content, '5']
 
@@ -38,10 +39,12 @@ router.post('/:id', autheticateToken, function(req, res, next){
       return res.status(500).json({ error: 'Failed to insert values into Reviews table' });
     }
 
+    content_id = result[0].largest_content_id + 1;
+
     console.log('Verified from Contents table:', result);
   });
 
-  var values = [11, user_id, 1, 'Meeting', 4, start_date, start_date];
+  var values = [11, user_id, 1, 'Meeting', content_id, start_date, start_date];
 
   const sql2 = 'INSERT INTO Reviews (meeting_id, user_id, book_id, review_type, content_id, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?, ?)';
   con.query(sql2, values, function(err, result) {
