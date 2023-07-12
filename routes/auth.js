@@ -108,7 +108,7 @@ router.get('/kakao/callback', async(req,res)=>{
                         res.status(500).send('Error inserting data into the database');
                     } else {
                         console.log('User inserted successfully');
-                        res.redirect('/auth/success/' + user_id);
+                        res.redirect('/auth/success/'+ access_token)
                     }
                 });
 
