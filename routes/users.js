@@ -6,7 +6,19 @@ const config = require('../config'); // Adjust the path if needed
 const jwt = require('jsonwebtoken')
 
 
+router.post('/:id', autheticateToken, function(req, res, next){
+  const con = mysql.createConnection({
+    host: config.database.host,
+    user: config.database.user,
+    password: config.database.password,
+    database: config.database.name
+  });
 
+  const user_id = req.user.user_id
+  console.log(req.user)
+  console.log(req.body)
+
+})
 /* GET users listing. */
 router.get('/:id', autheticateToken, function(req, res, next) {
   const con = mysql.createConnection({
