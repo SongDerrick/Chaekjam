@@ -31,9 +31,9 @@ router.post('/:id', autheticateToken, function(req, res, next){
     console.log('Values inserted into Contents table:', result);
   });
 
-  var values = [11, user_id, 1, 'Meeting', 4, start_date, start_date]
+  var values = [11, user_id, 1, 'Meeting', 4, start_date, start_date];
 
-  const sql2 = 'INSERT INTO Reviews (meeting_id, user_id, book_id, review_type, content_id, start_date, end_date) VALUES (?, ?, ?)';
+  const sql2 = 'INSERT INTO Reviews (meeting_id, user_id, book_id, review_type, content_id, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?, ?)';
   con.query(sql2, values, function(err, result) {
     if (err) {
       console.error('Error inserting values into Reviews table:', err);
