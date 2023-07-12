@@ -42,7 +42,7 @@ router.post('/:id', autheticateToken, function(req, res, next){
       }
   
       console.log('Values inserted into Reviews table:', result);
-      res.status(200);
+      res.status(200).json();
     });
   
     con.end();
