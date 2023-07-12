@@ -15,9 +15,35 @@ router.post('/:id', autheticateToken, function(req, res, next){
   });
 
   const user_id = req.user.user_id
-  const { title, content } = req.body;
+  const { title, content, start_date} = req.body;
   console.log(req.user)
-  console.log(title, content)
+  console.log(title, content, start_date)
+
+  var values = [content, '5']
+
+  const sql1 = 'INSERT INTO Contents (content, rating) VALUES (?, ?)';
+  con.query(sql1, values, function(err, result) {
+    if (err) {
+      console.error('Error inserting values into Reviews table:', err);
+      return res.status(500).json({ error: 'Failed to insert values into Reviews table' });
+    }
+
+    console.log('Values inserted into Contents table:', result);
+  });
+
+  var values = [11, user_id, 1, 'Meeting', 4, start_date, start_date]
+
+  const sql2 = 'INSERT INTO Reviews (meeting_id, user_id, book_id, review_type, content_id, start_date, end_date) VALUES (?, ?, ?)';
+  con.query(sql2, values, function(err, result) {
+    if (err) {
+      console.error('Error inserting values into Reviews table:', err);
+      return res.status(500).json({ error: 'Failed to insert values into Reviews table' });
+    }
+
+    console.log('Values inserted into Reviews table:', result);
+  });
+
+  con.end();
 
 })
 /* GET users listing. */
