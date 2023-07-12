@@ -30,19 +30,20 @@ router.post('/:id', autheticateToken, function(req, res, next){
     }
 
     console.log('Values inserted into Contents table:', result);
+    content_id = result.insertId
   });
 
-  const sql3 = 'SELECT MAX(content_id) AS largest_content_id FROM Contents;';
-  con.query(sql3, function(err, result) {
-    if (err) {
-      console.error('Error inserting values into Reviews table:', err);
-      return res.status(500).json({ error: 'Failed to insert values into Reviews table' });
-    }
+  // const sql3 = 'SELECT MAX(content_id) AS largest_content_id FROM Contents;';
+  // con.query(sql3, function(err, result) {
+  //   if (err) {
+  //     console.error('Error inserting values into Reviews table:', err);
+  //     return res.status(500).json({ error: 'Failed to insert values into Reviews table' });
+  //   }
 
-    content_id = result[0].largest_content_id + 1;
+  //   content_id = result[0].largest_content_id + 1;
 
-    console.log('Verified from Contents table:', result);
-  });
+  //   console.log('Verified from Contents table:', result);
+  // });
 
   var values = [11, user_id, 1, 'Meeting', content_id, start_date, start_date];
 
