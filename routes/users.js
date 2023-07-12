@@ -15,8 +15,9 @@ router.post('/:id', autheticateToken, function(req, res, next){
   });
 
   const user_id = req.user.user_id
+  const { title, content } = req.body;
   console.log(req.user)
-  console.log(req.body)
+  console.log(title, content)
 
 })
 /* GET users listing. */
