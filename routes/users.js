@@ -18,7 +18,7 @@ router.post('/:id', autheticateToken, function(req, res, next){
   const { title, content, start_date} = req.body;
   console.log(req.user)
   console.log(title, content, start_date)
-  var content_id = 0;
+  var content_id
 
   var values = [content, '5']
 
